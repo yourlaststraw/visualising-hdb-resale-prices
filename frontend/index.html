@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  .container {
+    margin-left: 0px;
+  }
+
+  .exit {
+    /* fill: red; */
+  }
+
+  .update {
+    /* fill: orange; */
+  }
+
+  .enter {
+    /* fill: green; */
+  }
+
+  .filter {
+    font-size: 15px;
+  }
+
+  #json {
+    max-height: 600px;
+    width: 150px;
+    font-size: 10px;
+    overflow: scroll;
+    border: 2px solid gray;
+    border-radius: 15px;
+  }
+
+  table {
+    width: 60%;
+    border-collapse: collapse;
+    margin: 0px auto;
+  }
+
+  /* Zebra striping */
+
+  tr:nth-of-type(odd) {
+    background: #eee;
+  }
+
+  th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    cursor: s-resize;
+    background-repeat: no-repeat;
+    background-position: 3% center;
+  }
+
+  td {
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  th {
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  th.des:after {
+    content: "\21E3";
+  }
+
+  th.aes:after {
+    content: "\21E1";
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+<body>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="https://github.com/shanegibney/Interactive-Data-Visualisation-II">Home</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Map</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" onclick="updateFunction('1','true')" href="#">Chart 1</a>
+        <a class="dropdown-item" onclick="updateFunction('2','true')" href="#">Chart 2</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More Charts</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" onclick="updateFunction('1','true')" href="#">Chart 1</a>
+        <a class="dropdown-item" onclick="updateFunction('2','true')" href="#">Chart 2</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Sort By</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" onclick="sortFunction('town')" href="#">Town</a>
+        <a class="dropdown-item" onclick="sortFunction('price')" href="#">Price</a>
+        <a class="dropdown-item" onclick="sortFunction('amenities')" href="#">Amenities</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" onclick="updateFunction('1','true')" href="#">Prediction</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">Data Source</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">About</a>
+    </li>
+   
+  </ul>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12" id="filter">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-12" id="race_graph">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4" id="pie">
+          </div>
+          <div class="col-md-6" id="race_graph_origin">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2" id="json">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+
+      </div>
+      <div class="col-md-8" id="table">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+       
+        <ol>
+    
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <script></script>
+  
+</body>
