@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../frontend/templates')
 
 # Define routes
 @app.route('/')
@@ -11,6 +11,9 @@ def index():
 def about():
     return render_template('about.html')
 
+@app.route('/map')
+def map():
+    return render_template('map.html')
 # Example of handling form submission
 @app.route('/submit', methods=['POST'])
 def submit():
