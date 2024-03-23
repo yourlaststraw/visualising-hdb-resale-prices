@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- leaflet stylesheet -->
+    <!-- Leaflet stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
     
-    <!-- leaflet javaScript -->
+    <!-- Leaflet JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     
     <style>
@@ -20,20 +20,39 @@
 </head>
 <body>
     <div id="map"></div>
-    <img src="https://www.onemap.gov.sg/web-assets/images/logo/om_logo.png" style="height:20px;width:20px;"/>&nbsp;<a href="https://www.onemap.gov.sg/" target="_blank" rel="noopener noreferrer">OneMap</a>&nbsp;&copy;&nbsp;contributors&nbsp;&#124;&nbsp;<a href="https://www.sla.gov.sg/" target="_blank" rel="noopener noreferrer">Singapore Land Authority</a>
-    <script>
+    <script >
         // Initialize the map
         var map = L.map('map').setView([1.3521, 103.8198], 12); // Center on Singapore with a zoom level of 12
 
+        // Define the tile layer
         L.tileLayer('https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.onemap.sg/home/">OneMap Singapore</a> contributors',
-        maxZoom: 18,
-        tileSize: 256,
-        zoomOffset: 0,
-        detectRetina: true,
-        attribution: '<img src="https://www.onemap.gov.sg/web-assets/images/logo/om_logo.png" style="height:20px;width:20px;"/>&nbsp;<a href="https://www.onemap.gov.sg/" target="_blank" rel="noopener noreferrer">OneMap</a>&nbsp;&copy;&nbsp;contributors&nbsp;&#124;&nbsp;<a href="https://www.sla.gov.sg/" target="_blank" rel="noopener noreferrer">Singapore Land Authority</a>' 
+            attribution: '&copy; <a href="https://www.onemap.sg/home/">OneMap Singapore</a> contributors',
+            maxZoom: 18,
         }).addTo(map);
+        var fileData = {{ fileData | tojson | safe }};
+    
         
+        // Check if fileData is an array, if not convert it into one
+        if (!Array.isArray(fileData)) {
+            fileData = [fileData]; // Ensure fileData is an array
+        }
+
+        // Loop through the data and add markers
+        fileData.forEach(function(item) {
+            var lat = parseFloat(item.Latitude);
+            var lng = parseFloat(item.Longitude);
+            // Validate coordinates before adding the marker
+            if (!isNaN(lat) && !isNaN(lng)) {
+                L.marker([lat, lng]).addTo(map)
+                    .bindPopup('Address: ' + item.Address + '<br>Resale Price: ' + item.resale_price);
+            }
+        });
     </script>
+    <!-- Attribution for OneMap -->
+    <div style="position: absolute; bottom: 0; right: 0; background: white; padding: 5px;">
+        <img src="https://www.onemap.gov.sg/web-assets/images/logo/om_logo.png" style="height:20px;width:20px;"/>&nbsp;
+        <a href="https://www.onemap.gov.sg/" target="_blank" rel="noopener noreferrer">OneMap</a>&nbsp;&copy;&nbsp;contributors&nbsp;&#124;&nbsp;
+        <a href="https://www.sla.gov.sg/" target="_blank" rel="noopener noreferrer">Singapore Land Authority</a>
+    </div>
 </body>
 </html>

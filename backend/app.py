@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import json
 
 app = Flask(__name__, template_folder='../frontend/templates')
 
@@ -13,7 +14,12 @@ def about():
 
 @app.route('/map')
 def map():
-    return render_template('map.html')
+    fileData = 0;
+    with open('/Users/sujitharajan/visualising-hdb-resale-prices/data_sample.json', 'r') as f:
+      fileData = json.load(f)
+      f.close()
+    return render_template('map.html', fileData = fileData)
+
 # Example of handling form submission
 @app.route('/submit', methods=['POST'])
 def submit():
