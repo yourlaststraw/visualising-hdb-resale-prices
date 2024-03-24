@@ -14,8 +14,8 @@ def about():
 
 @app.route('/map')
 def map():
-    fileData = 0;
-    with open('/Users/sujitharajan/visualising-hdb-resale-prices/data_sample.json', 'r') as f:
+    fileData = 0
+    with open('../data_sample.json', 'r') as f:
       fileData = json.load(f)
       f.close()
     return render_template('map.html', fileData = fileData)
