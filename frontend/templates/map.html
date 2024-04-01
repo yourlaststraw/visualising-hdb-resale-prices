@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
+{%extends "index.html"%}
+{% block head %}
     <title>Singapore Map</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +9,80 @@
     
     <!-- Leaflet JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider/distribute/nouislider.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/nouislider/distribute/nouislider.min.js"></script>
+
     <style>
-        #map {
+        body {
+            margin: 0;
+        }
+        .container {
+            display: flex;
             height: 100vh;
             width: 100%;
         }
+        .sidebar {
+            width: 20%; /* Adjust width as needed */
+            background-color: #f0f0f0; /* Light gray background */
+            padding-top: 30px; /* Padding inside the sidebar */
+            overflow-y: auto; /* Enables vertical scroll if content overflows */
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        #map {
+            flex-grow: 1; /* Takes up remaining space */
+            width: 80%; /* Adjust based on sidebar width */
+        }
+        .filter-section {
+            text-align: center; /* Center the filters */
+            margin-bottom: 10px; /* Space between filters and map */
+        }
+        .sidebar input[type="range"] {
+        width: 100%;
+        margin: 10px 0;
+        
+    }
     </style>
-</head>
-<body>
+{% endblock %}
+{% block content %}
+<div class="filter-section">
+    <form id="filterForm" action="/map" method="get">
+        <select id="town" name="town">
+            <option value="" disabled selected>{{town}}</option>
+            {% for town in towns %}
+                <option value="{{ town }}">{{ town }}</option>
+            {% endfor %}
+        </select>
+
+        <select id="storeyRange" name="storeyRange">
+            <option value="" disabled selected>{{storey_range}}</option>
+            {% for range in storey_ranges %}
+                <option value="{{ range }}">{{ range }}</option>
+            {% endfor %}
+        </select>
+
+        <select id="flatModel" name="flatModel">
+            <option value="" disabled selected>{{flat_model}}</option>
+            {% for model in flat_models %}
+                <option value="{{ model }}">{{ model }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <!-- Sidebar content here -->
+        <p> Resale Price Range: </p>
+        <br>
+        <div id="slider-price-range"></div>
+    </div>
     <div id="map"></div>
+</div>
+    <!-- The Map Container -->
+    <div id="map"></div>
+
+
     <script >
         // Initialize the map
         var map = L.map('map').setView([1.3521, 103.8198], 12); // Center on Singapore with a zoom level of 12
@@ -47,12 +110,63 @@
                     .bindPopup('Address: ' + item.Address + '<br>Resale Price: ' + item.resale_price);
             }
         });
+        document.addEventListener('DOMContentLoaded', function() {
+            const updateQueryStringParameter = (uri, key, value) => {
+                const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+                const separator = uri.indexOf('?') !== -1 ? "&" : "?";
+                if (uri.match(re)) {
+                    return uri.replace(re, '$1' + key + "=" + value + '$2');
+                }
+                else {
+                    return uri + separator + key + "=" + value;
+                }
+            };
+        
+            document.querySelectorAll('#filterForm select').forEach(selectElement => {
+                selectElement.addEventListener('change', function() {
+                    let currentUrl = window.location.href;
+                    let newUrl = updateQueryStringParameter(currentUrl, this.name, this.value);
+                    window.location.href = newUrl; // Navigate to the new URL
+                });
+            });
+        });
+
     </script>
+    <script>
+        var slider = document.getElementById('slider-price-range');
+    
+        noUiSlider.create(slider, {
+            start: [160000, 1185000],
+            connect: true,
+            range: {
+                'min': 160000.0,
+                'max': 1185000.0
+            },
+            // This step value will control how much the slider changes with each movement
+            step: 1000,
+            tooltips: true,
+            format: {
+              to: function (value) {
+                return value.toFixed(0);
+              },
+              from: function (value) {
+                return Number(value);
+              }
+            }
+        });
+    
+        // If you need to use the slider value immediately on change, add this event listener
+        slider.noUiSlider.on('update', function (values, handle) {
+            console.log(values[handle]);
+        });
+    
+    </script>
+    
     <!-- Attribution for OneMap -->
     <div style="position: absolute; bottom: 0; right: 0; background: white; padding: 5px;">
         <img src="https://www.onemap.gov.sg/web-assets/images/logo/om_logo.png" style="height:20px;width:20px;"/>&nbsp;
         <a href="https://www.onemap.gov.sg/" target="_blank" rel="noopener noreferrer">OneMap</a>&nbsp;&copy;&nbsp;contributors&nbsp;&#124;&nbsp;
         <a href="https://www.sla.gov.sg/" target="_blank" rel="noopener noreferrer">Singapore Land Authority</a>
     </div>
-</body>
-</html>
+    {% endblock %}
+
