@@ -60,7 +60,7 @@ def get_predicted_values():
 
                 # Add the predicted value to the dictionary
                 prediction['year'] = year
-                prediction['medianPrice'] = float(y_year_pred[0])
+                prediction['medianPrice'] = int(y_year_pred[0])
                 data.append(prediction)
 
                 # Retrain model with the predicted value included
