@@ -44,20 +44,24 @@ def get_predicted_values():
         if 'model' not in globals():
             return jsonify({'error': 'Model not trained'}), 500
 
-        predicted_values = {}
-
+        predicted_values = []
         # Predict values iteratively for years 2025 to 2030 for each town
         town_unique_encoded = np.unique(average_prices_df['town_encoded'])
         for town_enc in town_unique_encoded:
-            predictions = {}
+            town_data = {}
+            town_data['town'] = label_encoder.inverse_transform([town_enc])[0]
 
+            data = []
             for year in range(2025, 2031):
+                prediction = {}
                 # Predict value for the current year and town
                 X_year = np.array([[year, town_enc]])
                 y_year_pred = model.predict(X_year)
 
                 # Add the predicted value to the dictionary
-                predictions[str(year)] = float(y_year_pred[0])
+                prediction['year'] = year
+                prediction['medianPrice'] = float(y_year_pred[0])
+                data.append(prediction)
 
                 # Retrain model with the predicted value included
                 updated_data = average_prices_df.copy()
@@ -65,16 +69,16 @@ def get_predicted_values():
                 X_updated = updated_data[['year', 'town_encoded']]
                 y_updated = updated_data['average_price']
                 model.fit(X_updated, y_updated)
-
-            # Add predictions for the town to the overall predictions dictionary
-            town_name = label_encoder.inverse_transform([town_enc])[0]
-            predicted_values[town_name] = predictions
+            
+            town_data['data'] = data
+            predicted_values.append(town_data)
 
         return jsonify(predicted_values)
     except Exception as e:
         print("Error occurred during prediction:", e)
         traceback.print_exc()
         return jsonify({'error': 'Prediction failed'}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
