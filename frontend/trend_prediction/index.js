@@ -62,13 +62,14 @@ d3.csv("../../../data.csv").then(function(data) {
         .attr("value", function (d) { return d; });
 
     // Add x domain range between earliest date and latest date within processedData
-    x.domain(d3.extent(processedData.find(d => d.town === "ANG MO KIO").data, d => d.year));
+    x.domain([new Date(2017), new Date(2030)]);
     // Add y domain range between 0 and max median price of the selected town
     y.domain([0, d3.max(processedData.find(d => d.town === "ANG MO KIO").data, d => d.medianPrice)]);
 
     // Add the x-axis
     svg.append("g")
         .attr("transform", `translate(0, ${height})`)
+        .attr("class", "xAxis")
         .call(d3.axisBottom(x))
 
     // Add the y-axis
