@@ -5,7 +5,13 @@
   .container {
     margin-left: 0px;
   }
-
+  .nav {
+    background-color: #505050;
+    color: white;
+  }
+  .nav-link {
+    color: white;
+  }
   .exit {
     /* fill: red; */
   }
@@ -82,38 +88,13 @@
 <body>
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" href="https://github.com/shanegibney/Interactive-Data-Visualisation-II">Home</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="map" role="button" aria-haspopup="true" aria-expanded="false">Map</a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" onclick="updateFunction('1','true')" href="map">Chart 1</a>
-        <a class="dropdown-item" onclick="updateFunction('2','true')" href="map">Chart 2</a>
-      </div>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More Charts</a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" onclick="updateFunction('1','true')" href="#">Chart 1</a>
-        <a class="dropdown-item" onclick="updateFunction('2','true')" href="#">Chart 2</a>
-      </div>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Sort By</a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" onclick="sortFunction('town')" href="#">Town</a>
-        <a class="dropdown-item" onclick="sortFunction('price')" href="#">Price</a>
-        <a class="dropdown-item" onclick="sortFunction('amenities')" href="#">Amenities</a>
-      </div>
+      <a class="nav-link active" href="map" role="button" >Map</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" onclick="updateFunction('1','true')" href="#">Prediction</a>
+      <a class="nav-link" href="">Bar Charts</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">Data Source</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">About</a>
+      <a class="nav-link" href="#">Predictions</a>
     </li>
    
   </ul>

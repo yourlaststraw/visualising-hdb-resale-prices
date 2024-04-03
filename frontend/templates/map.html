@@ -23,7 +23,7 @@
         }
         .sidebar {
             width: 20%; /* Adjust width as needed */
-            background-color: #f0f0f0; /* Light gray background */
+            background-color: #FFAA33;
             padding-top: 30px; /* Padding inside the sidebar */
             overflow-y: auto; /* Enables vertical scroll if content overflows */
             padding-left: 40px;
@@ -34,37 +34,126 @@
             width: 80%; /* Adjust based on sidebar width */
         }
         .filter-section {
-            text-align: center; /* Center the filters */
-            margin-bottom: 10px; /* Space between filters and map */
+            text-align: center; 
+            background: #d9d9d9;
+            margin-top: -20px;
+            height: 45px;
+            font-color: white;
+            
+
         }
+        .filter-section form {
+            width: 100%;
+
+        }
+        .filter-section select {
+        width: 24.5%; 
+        height: 45px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        background-color:#ffba58; 
+        border-color: #ffba58 ;
+        font-color: white;
+        
+        }
+        .filter-section select:hover {
+            background-color: #cee3ff;
+          }
         .sidebar input[type="range"] {
         width: 100%;
         margin: 10px 0;
-        
+        .filterForm {
+            dislay: flex;
+        }
     }
+   .sidebar {
+    margin-left: -15px;
+    background-color:#505050;
+   }
+   .filter-section select option:selected {
+    font-color: white; 
+    font-weight: bold; /* Bold font weight */
+  }
+  .aligns {
+    text-align: center;
+    color: white;
+  }
+  .slider {
+    background-color: #ffe9cd;
+  }
+
+    
+    .noUi-connect {  
+    background-color:#81b8ff;
+    }
+
+    .noUi-handle {  /* Styling for the slider handles */
+    background-color:black;
+    border: black;
+    }
+  
     </style>
 {% endblock %}
 {% block content %}
 <div class="filter-section">
     <form id="filterForm" action="/map" method="get">
+        <select id="years" name="years">
+            {% if years == '' or years == None%}
+            <option class = "aligns" value="Select Year" disabled selected>Select Year</option>
+            {% else %}
+            <option class = "aligns" value="" disabled selected>{{years}}</option>
+            {%endif%}
+            {% for year in year %}
+                {% if year == '' %}
+                <option value=""> Select Year </option>
+                {%else%}
+                <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        
         <select id="town" name="town">
-            <option value="" disabled selected>{{town}}</option>
+            {% if town == '' or town == None%}
+            <option class = "aligns" value="Select Town" disabled selected>Select Town</option>
+            {% else %}
+            <option class = "aligns" value="" disabled selected>{{town}}</option>
+            {%endif%}
             {% for town in towns %}
+                {% if town == '' %}
+                <option value=""> Select Town </option>
+                {%else%}
                 <option value="{{ town }}">{{ town }}</option>
+                {% endif %}
             {% endfor %}
         </select>
 
-        <select id="storeyRange" name="storeyRange">
-            <option value="" disabled selected>{{storey_range}}</option>
+        <select id="storeyRange" name="storeyRange" >
+            {% if storey_range == '' or storey_range == None%}
+            <option class = "aligns" value="Select Storey Range" disabled selected>Select Storey Range</option>
+            {% else %}
+            <option class = "aligns" value="" disabled selected>{{storey_range}}</option>
+            {%endif%}
             {% for range in storey_ranges %}
+            {% if range == '' %}
+                <option value=""> Select Storey Range </option>
+            {% else %}
                 <option value="{{ range }}">{{ range }}</option>
+            {%endif%}
             {% endfor %}
         </select>
 
-        <select id="flatModel" name="flatModel">
-            <option value="" disabled selected>{{flat_model}}</option>
+        <select id="flatModel" name="flatModel" >
+            {% if flat_model == '' or flat_model == None%}
+            <option class = "aligns" value="Select Flat Model" disabled selected>Select Flat Model</option>
+            {% else %}
+            <option class = "aligns" value="" disabled selected>{{flat_model}}</option>
+            {%endif%}
             {% for model in flat_models %}
-                <option value="{{ model }}">{{ model }}</option>
+            {% if model == '' %}
+            <option value=""> Select Flat Model </option>
+            {% else %}
+            <option value="{{ model }}">{{ model }}</option>
+            {%endif%}
             {% endfor %}
         </select>
     </form>
@@ -75,15 +164,31 @@
         <!-- Sidebar content here -->
         <p> Resale Price Range: </p>
         <br>
-        <div id="slider-price-range"></div>
+        <div class = "slider" id="slider-price-range"></div>
+        <br>
+        <div id="infoDiv">Click a marker to show info here</div>
+        <div id ="showdiv" style="display: none;">
+            <h5> Address: </h5>
+            <p id = "add"> </p>
+            <h5> Price: </h5>
+            <p id = "price"> </p>
+            <h5> Closest Mrt: </h5>
+            <p id = "mrt"> </p>
+            <h5> Closest School: </h5>
+            <p id = "sch"> </p>
+            <h5> Closest Hospital: </h5>
+            <p id = "hosp"> </p>
+
+
+        </div>
     </div>
     <div id="map"></div>
 </div>
-    <!-- The Map Container -->
-    <div id="map"></div>
+    
 
 
     <script >
+        
         // Initialize the map
         var map = L.map('map').setView([1.3521, 103.8198], 12); // Center on Singapore with a zoom level of 12
 
@@ -99,17 +204,78 @@
         if (!Array.isArray(fileData)) {
             fileData = [fileData]; // Ensure fileData is an array
         }
-
+        
         // Loop through the data and add markers
         fileData.forEach(function(item) {
-            var lat = parseFloat(item.Latitude);
-            var lng = parseFloat(item.Longitude);
+            var lat = parseFloat(item.latitude);
+            var lng = parseFloat(item.longitude);
             // Validate coordinates before adding the marker
             if (!isNaN(lat) && !isNaN(lng)) {
-                L.marker([lat, lng]).addTo(map)
-                    .bindPopup('Address: ' + item.Address + '<br>Resale Price: ' + item.resale_price);
-            }
-        });
+                var markerHtmlStyles = `
+                    background-color: #505050;
+                    width: 1.8rem;
+                    height: 1.8rem;
+                    display: block;
+                    left: -1.5rem;
+                    top: -1.5rem;
+                    position: relative;
+                    border-radius: 2rem 2rem 0;
+                    transform: rotate(45deg);
+                    border: 1px solid #81b8ff`;
+    
+                var innerCircleStyles = `
+                    width: 0.9rem;
+                    height: 0.9rem;
+                    border-radius: 50%;
+                    background-color: #81b8ff;
+                    position: absolute;
+                    top: 17%;
+                    left: 13%;
+                    padding-
+                    transform: rotate(-45deg);`;
+    
+            var customMarkerIcon = L.divIcon({
+                className: "my-custom-pin",
+                iconAnchor: [0, 24],
+                labelAnchor: [-6, 0],
+                popupAnchor: [0, -36],
+                html: `<div style="${markerHtmlStyles}"><div style="${innerCircleStyles}"></div></div>`
+            });
+    
+            
+            var marker = L.marker([lat, lng], { icon: customMarkerIcon }).addTo(map);
+
+            // Here we define the content that will appear both in the popup and in the div
+            var content = 'Address: ' + item.address + '<br>Resale Price: ' + item.resale_price;
+            var address = item.address
+            var price =  item.resale_price
+            var mrt = item['Closest Station']
+            var mrt_distance = item['Closest Station distance']
+            var sch = item['Closest School']
+            var sch_distance = item['Closest School distance']
+            var hosp = item['Closest Healthcare']
+            var hosp_distance = item['Closest Healthcare distance']
+            var divToHide = document.getElementById('infoDiv');
+            var divToShow = document.getElementById('showdiv');
+            // Bind the popup with the content
+            marker.bindPopup(content);
+            
+            // Add a click event listener to the marker
+            marker.on('click', function(e) {
+                
+                
+                    divToHide.style.display = 'none'; // Hide it
+                    divToShow.style.display = 'block'; // Show the second div
+                    document.getElementById('add').innerHTML = address;
+                    document.getElementById('price').innerHTML = price;
+                    document.getElementById('mrt').innerHTML = mrt + ', ' + parseFloat(mrt_distance.toFixed(3)) + "Km away";
+                    document.getElementById('sch').innerHTML = sch + ', ' + parseFloat(sch_distance.toFixed(3)) + "Km away";
+                    document.getElementById('hosp').innerHTML = hosp + ', ' + parseFloat(hosp_distance.toFixed(3)) + "Km away";
+             
+                
+            });
+        }
+    });
         document.addEventListener('DOMContentLoaded', function() {
             const updateQueryStringParameter = (uri, key, value) => {
                 const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
@@ -155,7 +321,7 @@
             }
         });
     
-        // If you need to use the slider value immediately on change, add this event listener
+        
         slider.noUiSlider.on('update', function (values, handle) {
             console.log(values[handle]);
         });
