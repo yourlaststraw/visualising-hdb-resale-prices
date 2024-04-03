@@ -49,775 +49,869 @@ d3.csv("../../../data.csv").then(function(data) {
     const pastData = processData(data);
     console.log(pastData);
 
-    // fetch('/predicted_values')
-    //     .then(response => response.json())
-    //     .then(predictedData => {
-    //         // Combine historical and predicted data
-    //         const pastData = pastData.concat(predictedData);
-    //         update(pastData);
-    //     })
-    //     .catch(error => console.error('Error fetching predicted data:', error));
-
-    // console.log(pastData);
-
-    // Temporary fix for prediction data
-    const predictedData =
+    // Retrieve predicted data from forecast.json and assign to predictedData
+    const predictedData = 
     [
         {
+          "town": "ANG MO KIO",
           "data": [
             {
-              "medianPrice": 378161,
+              "medianPrice": 472475,
+              "year": 2024
+            },
+            {
+              "medianPrice": 531203,
               "year": 2025
             },
             {
-              "medianPrice": 377831,
+              "medianPrice": 589931,
               "year": 2026
             },
             {
-              "medianPrice": 377647,
+              "medianPrice": 648659,
               "year": 2027
             },
             {
-              "medianPrice": 377544,
+              "medianPrice": 707387,
               "year": 2028
             },
             {
-              "medianPrice": 377486,
+              "medianPrice": 766115,
               "year": 2029
             },
             {
-              "medianPrice": 377453,
+              "medianPrice": 824843,
               "year": 2030
             }
-          ],
-          "town": "ANG MO KIO"
+          ]
         },
         {
+          "town": "BEDOK",
           "data": [
             {
-              "medianPrice": 402669,
+              "medianPrice": 518308,
+              "year": 2024
+            },
+            {
+              "medianPrice": 586066,
               "year": 2025
             },
             {
-              "medianPrice": 402151,
+              "medianPrice": 653825,
               "year": 2026
             },
             {
-              "medianPrice": 401860,
+              "medianPrice": 721583,
               "year": 2027
             },
             {
-              "medianPrice": 401698,
+              "medianPrice": 789342,
               "year": 2028
             },
             {
-              "medianPrice": 401607,
+              "medianPrice": 857100,
               "year": 2029
             },
             {
-              "medianPrice": 401556,
+              "medianPrice": 924859,
               "year": 2030
             }
-          ],
-          "town": "BEDOK"
+          ]
         },
         {
+          "town": "BISHAN",
           "data": [
             {
-              "medianPrice": 662426,
+              "medianPrice": 870612,
+              "year": 2024
+            },
+            {
+              "medianPrice": 984432,
               "year": 2025
             },
             {
-              "medianPrice": 662508,
+              "medianPrice": 1098262,
               "year": 2026
             },
             {
-              "medianPrice": 662554,
+              "medianPrice": 1212097,
               "year": 2027
             },
             {
-              "medianPrice": 662579,
+              "medianPrice": 1325935,
               "year": 2028
             },
             {
-              "medianPrice": 662593,
+              "medianPrice": 1439774,
               "year": 2029
             },
             {
-              "medianPrice": 662601,
+              "medianPrice": 1553614,
               "year": 2030
             }
-          ],
-          "town": "BISHAN"
+          ]
         },
         {
+          "town": "BUKIT BATOK",
           "data": [
             {
-              "medianPrice": 418330,
+              "medianPrice": 570906,
+              "year": 2024
+            },
+            {
+              "medianPrice": 645823,
               "year": 2025
             },
             {
-              "medianPrice": 417717,
+              "medianPrice": 720740,
               "year": 2026
             },
             {
-              "medianPrice": 417374,
+              "medianPrice": 795657,
               "year": 2027
             },
             {
-              "medianPrice": 417181,
+              "medianPrice": 870574,
               "year": 2028
             },
             {
-              "medianPrice": 417074,
+              "medianPrice": 945491,
               "year": 2029
             },
             {
-              "medianPrice": 417013,
+              "medianPrice": 1020408,
               "year": 2030
             }
-          ],
-          "town": "BUKIT BATOK"
+          ]
         },
         {
+          "town": "BUKIT MERAH",
           "data": [
             {
-              "medianPrice": 624163,
+              "medianPrice": 808400,
+              "year": 2024
+            },
+            {
+              "medianPrice": 915019,
               "year": 2025
             },
             {
-              "medianPrice": 623039,
+              "medianPrice": 1021638,
               "year": 2026
             },
             {
-              "medianPrice": 622409,
+              "medianPrice": 1128257,
               "year": 2027
             },
             {
-              "medianPrice": 622056,
+              "medianPrice": 1234876,
               "year": 2028
             },
             {
-              "medianPrice": 621859,
+              "medianPrice": 1341494,
               "year": 2029
             },
             {
-              "medianPrice": 621748,
+              "medianPrice": 1448113,
               "year": 2030
             }
-          ],
-          "town": "BUKIT MERAH"
+          ]
         },
         {
+          "town": "BUKIT PANJANG",
           "data": [
             {
-              "medianPrice": 458224,
+              "medianPrice": 562308,
+              "year": 2024
+            },
+            {
+              "medianPrice": 589145,
               "year": 2025
             },
             {
-              "medianPrice": 458339,
+              "medianPrice": 615983,
               "year": 2026
             },
             {
-              "medianPrice": 458404,
+              "medianPrice": 642823,
               "year": 2027
             },
             {
-              "medianPrice": 458440,
+              "medianPrice": 669662,
               "year": 2028
             },
             {
-              "medianPrice": 458460,
+              "medianPrice": 696501,
               "year": 2029
             },
             {
-              "medianPrice": 458472,
+              "medianPrice": 723341,
               "year": 2030
             }
-          ],
-          "town": "BUKIT PANJANG"
+          ]
         },
         {
+          "town": "BUKIT TIMAH",
           "data": [
             {
-              "medianPrice": 747064,
+              "medianPrice": 1197494,
+              "year": 2024
+            },
+            {
+              "medianPrice": 1614846,
               "year": 2025
             },
             {
-              "medianPrice": 745297,
+              "medianPrice": 2032973,
               "year": 2026
             },
             {
-              "medianPrice": 744308,
+              "medianPrice": 2451100,
               "year": 2027
             },
             {
-              "medianPrice": 743754,
+              "medianPrice": 2869226,
               "year": 2028
             },
             {
-              "medianPrice": 743443,
+              "medianPrice": 3287353,
               "year": 2029
             },
             {
-              "medianPrice": 743270,
+              "medianPrice": 3705480,
               "year": 2030
             }
-          ],
-          "town": "BUKIT TIMAH"
+          ]
         },
         {
+          "town": "CENTRAL AREA",
           "data": [
             {
-              "medianPrice": 579803,
+              "medianPrice": 528807,
+              "year": 2024
+            },
+            {
+              "medianPrice": 537853,
               "year": 2025
             },
             {
-              "medianPrice": 579638,
+              "medianPrice": 546828,
               "year": 2026
             },
             {
-              "medianPrice": 579546,
+              "medianPrice": 555802,
               "year": 2027
             },
             {
-              "medianPrice": 579494,
+              "medianPrice": 564777,
               "year": 2028
             },
             {
-              "medianPrice": 579465,
+              "medianPrice": 573751,
               "year": 2029
             },
             {
-              "medianPrice": 579449,
+              "medianPrice": 582726,
               "year": 2030
             }
-          ],
-          "town": "CENTRAL AREA"
+          ]
         },
         {
+          "town": "CHOA CHU KANG",
           "data": [
             {
-              "medianPrice": 432751,
+              "medianPrice": 562793,
+              "year": 2024
+            },
+            {
+              "medianPrice": 635207,
               "year": 2025
             },
             {
-              "medianPrice": 432861,
+              "medianPrice": 707920,
               "year": 2026
             },
             {
-              "medianPrice": 432922,
+              "medianPrice": 780634,
               "year": 2027
             },
             {
-              "medianPrice": 432957,
+              "medianPrice": 853348,
               "year": 2028
             },
             {
-              "medianPrice": 432976,
+              "medianPrice": 926062,
               "year": 2029
             },
             {
-              "medianPrice": 432986,
+              "medianPrice": 998776,
               "year": 2030
             }
-          ],
-          "town": "CHOA CHU KANG"
+          ]
         },
         {
+          "town": "CLEMENTI",
           "data": [
             {
-              "medianPrice": 472114,
+              "medianPrice": 519681,
+              "year": 2024
+            },
+            {
+              "medianPrice": 554282,
               "year": 2025
             },
             {
-              "medianPrice": 472157,
+              "medianPrice": 589039,
               "year": 2026
             },
             {
-              "medianPrice": 472182,
+              "medianPrice": 623796,
               "year": 2027
             },
             {
-              "medianPrice": 472195,
+              "medianPrice": 658553,
               "year": 2028
             },
             {
-              "medianPrice": 472203,
+              "medianPrice": 693310,
               "year": 2029
             },
             {
-              "medianPrice": 472207,
+              "medianPrice": 728067,
               "year": 2030
             }
-          ],
-          "town": "CLEMENTI"
+          ]
         },
         {
+          "town": "GEYLANG",
           "data": [
             {
-              "medianPrice": 428929,
+              "medianPrice": 436823,
+              "year": 2024
+            },
+            {
+              "medianPrice": 336160,
               "year": 2025
             },
             {
-              "medianPrice": 429170,
+              "medianPrice": 235477,
               "year": 2026
             },
             {
-              "medianPrice": 429305,
+              "medianPrice": 134793,
               "year": 2027
             },
             {
-              "medianPrice": 429380,
+              "medianPrice": 34110,
               "year": 2028
             },
             {
-              "medianPrice": 429423,
+              "medianPrice": -66572,
               "year": 2029
             },
             {
-              "medianPrice": 429446,
+              "medianPrice": -167255,
               "year": 2030
             }
-          ],
-          "town": "GEYLANG"
+          ]
         },
         {
+          "town": "HOUGANG",
           "data": [
             {
-              "medianPrice": 454391,
+              "medianPrice": 602220,
+              "year": 2024
+            },
+            {
+              "medianPrice": 679089,
               "year": 2025
             },
             {
-              "medianPrice": 455157,
+              "medianPrice": 755986,
               "year": 2026
             },
             {
-              "medianPrice": 455587,
+              "medianPrice": 832885,
               "year": 2027
             },
             {
-              "medianPrice": 455827,
+              "medianPrice": 909785,
               "year": 2028
             },
             {
-              "medianPrice": 455961,
+              "medianPrice": 986684,
               "year": 2029
             },
             {
-              "medianPrice": 456037,
+              "medianPrice": 1063583,
               "year": 2030
             }
-          ],
-          "town": "HOUGANG"
+          ]
         },
         {
+          "town": "JURONG EAST",
           "data": [
             {
-              "medianPrice": 420612,
+              "medianPrice": 496290,
+              "year": 2024
+            },
+            {
+              "medianPrice": 519282,
               "year": 2025
             },
             {
-              "medianPrice": 420597,
+              "medianPrice": 542495,
               "year": 2026
             },
             {
-              "medianPrice": 420588,
+              "medianPrice": 565699,
               "year": 2027
             },
             {
-              "medianPrice": 420583,
+              "medianPrice": 588903,
               "year": 2028
             },
             {
-              "medianPrice": 420580,
+              "medianPrice": 612106,
               "year": 2029
             },
             {
-              "medianPrice": 420579,
+              "medianPrice": 635310,
               "year": 2030
             }
-          ],
-          "town": "JURONG EAST"
+          ]
         },
         {
+          "town": "JURONG WEST",
           "data": [
             {
-              "medianPrice": 434940,
+              "medianPrice": 556394,
+              "year": 2024
+            },
+            {
+              "medianPrice": 628749,
               "year": 2025
             },
             {
-              "medianPrice": 434809,
+              "medianPrice": 701061,
               "year": 2026
             },
             {
-              "medianPrice": 434735,
+              "medianPrice": 773374,
               "year": 2027
             },
             {
-              "medianPrice": 434693,
+              "medianPrice": 845686,
               "year": 2028
             },
             {
-              "medianPrice": 434670,
+              "medianPrice": 917999,
               "year": 2029
             },
             {
-              "medianPrice": 434657,
+              "medianPrice": 990311,
               "year": 2030
             }
-          ],
-          "town": "JURONG WEST"
+          ]
         },
         {
+          "town": "KALLANG/WHAMPOA",
           "data": [
             {
-              "medianPrice": 524832,
+              "medianPrice": 683827,
+              "year": 2024
+            },
+            {
+              "medianPrice": 775106,
               "year": 2025
             },
             {
-              "medianPrice": 525222,
+              "medianPrice": 866162,
               "year": 2026
             },
             {
-              "medianPrice": 525440,
+              "medianPrice": 957217,
               "year": 2027
             },
             {
-              "medianPrice": 525563,
+              "medianPrice": 1048272,
               "year": 2028
             },
             {
-              "medianPrice": 525631,
+              "medianPrice": 1139327,
               "year": 2029
             },
             {
-              "medianPrice": 525669,
+              "medianPrice": 1230382,
               "year": 2030
             }
-          ],
-          "town": "KALLANG/WHAMPOA"
+          ]
         },
         {
+          "town": "MARINE PARADE",
           "data": [
             {
-              "medianPrice": 483616,
+              "medianPrice": 539578,
+              "year": 2024
+            },
+            {
+              "medianPrice": 558956,
               "year": 2025
             },
             {
-              "medianPrice": 483993,
+              "medianPrice": 578269,
               "year": 2026
             },
             {
-              "medianPrice": 484203,
+              "medianPrice": 597581,
               "year": 2027
             },
             {
-              "medianPrice": 484321,
+              "medianPrice": 616893,
               "year": 2028
             },
             {
-              "medianPrice": 484387,
+              "medianPrice": 636206,
               "year": 2029
             },
             {
-              "medianPrice": 484424,
+              "medianPrice": 655518,
               "year": 2030
             }
-          ],
-          "town": "MARINE PARADE"
+          ]
         },
         {
+          "town": "PASIR RIS",
           "data": [
             {
-              "medianPrice": 531153,
+              "medianPrice": 696687,
+              "year": 2024
+            },
+            {
+              "medianPrice": 786906,
               "year": 2025
             },
             {
-              "medianPrice": 530183,
+              "medianPrice": 877266,
               "year": 2026
             },
             {
-              "medianPrice": 529641,
+              "medianPrice": 967626,
               "year": 2027
             },
             {
-              "medianPrice": 529337,
+              "medianPrice": 1057986,
               "year": 2028
             },
             {
-              "medianPrice": 529166,
+              "medianPrice": 1148346,
               "year": 2029
             },
             {
-              "medianPrice": 529071,
+              "medianPrice": 1238706,
               "year": 2030
             }
-          ],
-          "town": "PASIR RIS"
+          ]
         },
         {
+          "town": "PUNGGOL",
           "data": [
             {
-              "medianPrice": 494129,
+              "medianPrice": 628003,
+              "year": 2024
+            },
+            {
+              "medianPrice": 705565,
               "year": 2025
             },
             {
-              "medianPrice": 493728,
+              "medianPrice": 785045,
               "year": 2026
             },
             {
-              "medianPrice": 493503,
+              "medianPrice": 864560,
               "year": 2027
             },
             {
-              "medianPrice": 493377,
+              "medianPrice": 944075,
               "year": 2028
             },
             {
-              "medianPrice": 493307,
+              "medianPrice": 1023590,
               "year": 2029
             },
             {
-              "medianPrice": 493267,
+              "medianPrice": 1103106,
               "year": 2030
             }
-          ],
-          "town": "PUNGGOL"
+          ]
         },
         {
+          "town": "QUEENSTOWN",
           "data": [
             {
-              "medianPrice": 623497,
+              "medianPrice": 777404,
+              "year": 2024
+            },
+            {
+              "medianPrice": 835001,
               "year": 2025
             },
             {
-              "medianPrice": 622350,
+              "medianPrice": 882612,
               "year": 2026
             },
             {
-              "medianPrice": 621707,
+              "medianPrice": 930043,
               "year": 2027
             },
             {
-              "medianPrice": 621347,
+              "medianPrice": 977471,
               "year": 2028
             },
             {
-              "medianPrice": 621146,
+              "medianPrice": 1024899,
               "year": 2029
             },
             {
-              "medianPrice": 621033,
+              "medianPrice": 1072327,
               "year": 2030
             }
-          ],
-          "town": "QUEENSTOWN"
+          ]
         },
         {
+          "town": "SEMBAWANG",
           "data": [
             {
-              "medianPrice": 435630,
+              "medianPrice": 595743,
+              "year": 2024
+            },
+            {
+              "medianPrice": 672810,
               "year": 2025
             },
             {
-              "medianPrice": 435701,
+              "medianPrice": 749894,
               "year": 2026
             },
             {
-              "medianPrice": 435741,
+              "medianPrice": 826979,
               "year": 2027
             },
             {
-              "medianPrice": 435763,
+              "medianPrice": 904063,
               "year": 2028
             },
             {
-              "medianPrice": 435776,
+              "medianPrice": 981148,
               "year": 2029
             },
             {
-              "medianPrice": 435783,
+              "medianPrice": 1058233,
               "year": 2030
             }
-          ],
-          "town": "SEMBAWANG"
+          ]
         },
         {
+          "town": "SENGKANG",
           "data": [
             {
-              "medianPrice": 475591,
+              "medianPrice": 606843,
+              "year": 2024
+            },
+            {
+              "medianPrice": 665419,
               "year": 2025
             },
             {
-              "medianPrice": 474814,
+              "medianPrice": 735016,
               "year": 2026
             },
             {
-              "medianPrice": 474378,
+              "medianPrice": 806365,
               "year": 2027
             },
             {
-              "medianPrice": 474135,
+              "medianPrice": 877992,
               "year": 2028
             },
             {
-              "medianPrice": 473998,
+              "medianPrice": 949664,
               "year": 2029
             },
             {
-              "medianPrice": 473922,
+              "medianPrice": 1021342,
               "year": 2030
             }
-          ],
-          "town": "SENGKANG"
+          ]
         },
         {
+          "town": "SERANGOON",
           "data": [
             {
-              "medianPrice": 504551,
+              "medianPrice": 626596,
+              "year": 2024
+            },
+            {
+              "medianPrice": 708000,
               "year": 2025
             },
             {
-              "medianPrice": 504099,
+              "medianPrice": 789422,
               "year": 2026
             },
             {
-              "medianPrice": 503846,
+              "medianPrice": 870853,
               "year": 2027
             },
             {
-              "medianPrice": 503704,
+              "medianPrice": 952287,
               "year": 2028
             },
             {
-              "medianPrice": 503625,
+              "medianPrice": 1033723,
               "year": 2029
             },
             {
-              "medianPrice": 503581,
+              "medianPrice": 1115161,
               "year": 2030
             }
-          ],
-          "town": "SERANGOON"
+          ]
         },
         {
+          "town": "TAMPINES",
           "data": [
             {
-              "medianPrice": 495675,
+              "medianPrice": 651636,
+              "year": 2024
+            },
+            {
+              "medianPrice": 737663,
               "year": 2025
             },
             {
-              "medianPrice": 494705,
+              "medianPrice": 823697,
               "year": 2026
             },
             {
-              "medianPrice": 494162,
+              "medianPrice": 909730,
               "year": 2027
             },
             {
-              "medianPrice": 493858,
+              "medianPrice": 995764,
               "year": 2028
             },
             {
-              "medianPrice": 493687,
+              "medianPrice": 1081797,
               "year": 2029
             },
             {
-              "medianPrice": 493592,
+              "medianPrice": 1167831,
               "year": 2030
             }
-          ],
-          "town": "TAMPINES"
+          ]
         },
         {
+          "town": "TOA PAYOH",
           "data": [
             {
-              "medianPrice": 454843,
+              "medianPrice": 660120,
+              "year": 2024
+            },
+            {
+              "medianPrice": 743339,
               "year": 2025
             },
             {
-              "medianPrice": 454632,
+              "medianPrice": 827400,
               "year": 2026
             },
             {
-              "medianPrice": 454514,
+              "medianPrice": 911466,
               "year": 2027
             },
             {
-              "medianPrice": 454448,
+              "medianPrice": 995532,
               "year": 2028
             },
             {
-              "medianPrice": 454411,
+              "medianPrice": 1079597,
               "year": 2029
             },
             {
-              "medianPrice": 454390,
+              "medianPrice": 1163663,
               "year": 2030
             }
-          ],
-          "town": "TOA PAYOH"
+          ]
         },
         {
+          "town": "WOODLANDS",
           "data": [
             {
-              "medianPrice": 422290,
+              "medianPrice": 613019,
+              "year": 2024
+            },
+            {
+              "medianPrice": 692440,
               "year": 2025
             },
             {
-              "medianPrice": 422423,
+              "medianPrice": 771806,
               "year": 2026
             },
             {
-              "medianPrice": 422497,
+              "medianPrice": 851172,
               "year": 2027
             },
             {
-              "medianPrice": 422539,
+              "medianPrice": 930538,
               "year": 2028
             },
             {
-              "medianPrice": 422562,
+              "medianPrice": 1009903,
               "year": 2029
             },
             {
-              "medianPrice": 422575,
+              "medianPrice": 1089269,
               "year": 2030
             }
-          ],
-          "town": "WOODLANDS"
+          ]
         },
         {
+          "town": "YISHUN",
           "data": [
             {
-              "medianPrice": 396431,
+              "medianPrice": 527550,
+              "year": 2024
+            },
+            {
+              "medianPrice": 562525,
               "year": 2025
             },
             {
-              "medianPrice": 396617,
+              "medianPrice": 597817,
               "year": 2026
             },
             {
-              "medianPrice": 396721,
+              "medianPrice": 633120,
               "year": 2027
             },
             {
-              "medianPrice": 396780,
+              "medianPrice": 668424,
               "year": 2028
             },
             {
-              "medianPrice": 396812,
+              "medianPrice": 703727,
               "year": 2029
             },
             {
-              "medianPrice": 396831,
+              "medianPrice": 739031,
               "year": 2030
             }
-          ],
-          "town": "YISHUN"
+          ]
         }
       ]
+
 
     // Merging of past and predicted data based on town
     const allData = pastData.map(d => {
@@ -906,33 +1000,6 @@ d3.csv("../../../data.csv").then(function(data) {
         .style("font-weight", "bold")
         .style("font-family", "sans-serif")
         .text("Median Prices of HDB Resale Flats in Singapore");
-
-    // Add legend
-    // legend.append("circle")
-    //     .attr("x", 0)
-    //     .attr("y", 0)
-    //     .attr("width", 10)
-    //     .attr("height", 10)
-    //     .style("fill", "steelblue");
-
-    // legend.append("text")
-    //     .attr("x", 20)
-    //     .attr("y", -15)
-    //     .text("Past Data")
-    //     .style("font-size", "14px");
-
-    // legend.append("circle")
-    //     .attr("x", 0)
-    //     .attr("y", 20)
-    //     .attr("width", 10)
-    //     .attr("height", 10)
-    //     .style("fill", "red");
-
-    // legend.append("text")
-    //     .attr("x", 20)
-    //     .attr("y", 5)
-    //     .text("Predicted Data")
-    //     .style("font-size", "14px");
 
     // Handmade legend
     svg.append("circle").attr("cx",500).attr("cy",-20).attr("r", 6).style("fill", "steelblue")
