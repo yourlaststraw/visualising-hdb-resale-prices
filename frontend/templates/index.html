@@ -1,137 +1,137 @@
 <!DOCTYPE html>
 <head>
-<meta charset="utf-8">
-<style>
-  .container {
-    margin-left: 0px;
-  }
-  .nav {
-    background-color: #505050;
-    color: white;
-  }
-  .nav-link {
-    color: white;
-  }
-  .exit {
+  <meta charset="utf-8" />
+  <style>
+    .container {
+      margin-left: 0px;
+    }
+    .nav {
+      background-color: #505050;
+      color: white;
+      position: sticky; /* Make the navbar sticky */
+      top: 0; /* Stick it to the top of the viewport */
+      z-index: 1000; /* Ensure it appears above other content */
+    }
+    .nav-link {
+      color: white;
+    }
+    .exit {
     /* fill: red; */
-  }
+    }
 
-  .update {
+    .update {
     /* fill: orange; */
-  }
+    }
 
-  .enter {
+    .enter {
     /* fill: green; */
-  }
+    }
 
-  .filter {
-    font-size: 15px;
-  }
+    .filter {
+      font-size: 15px;
+    }
 
-  #json {
-    max-height: 600px;
-    width: 150px;
-    font-size: 10px;
-    overflow: scroll;
-    border: 2px solid gray;
-    border-radius: 15px;
-  }
+    #json {
+      max-height: 600px;
+      width: 150px;
+      font-size: 10px;
+      overflow: scroll;
+      border: 2px solid gray;
+      border-radius: 15px;
+    }
 
-  table {
-    width: 60%;
-    border-collapse: collapse;
-    margin: 0px auto;
-  }
+    table {
+      width: 60%;
+      border-collapse: collapse;
+      margin: 0px auto;
+    }
 
-  /* Zebra striping */
+    /* Zebra striping */
 
-  tr:nth-of-type(odd) {
-    background: #eee;
-  }
+    tr:nth-of-type(odd) {
+      background: #eee;
+    }
 
-  th {
-    background: #333;
-    color: white;
-    font-weight: bold;
-    cursor: s-resize;
-    background-repeat: no-repeat;
-    background-position: 3% center;
-  }
+    th {
+      background: #333;
+      color: white;
+      font-weight: bold;
+      cursor: s-resize;
+      background-repeat: no-repeat;
+      background-position: 3% center;
+    }
 
-  td {
-    padding: 6px;
-    border: 1px solid #ccc;
-    text-align: center;
-  }
+    td {
+      padding: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
 
-  th {
-    padding: 6px;
-    border: 1px solid #ccc;
-    text-align: center;
-  }
+    th {
+      padding: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
 
-  th.des:after {
-    content: "\21E3";
-  }
+    th.des:after {
+      content: "\21E3";
+    }
 
-  th.aes:after {
-    content: "\21E1";
-  }
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
-{% block head %}{% endblock %}
+    th.aes:after {
+      content: "\21E1";
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="style.css">
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+    crossorigin="anonymous"
+  ></script>
+  {% block head %}{% endblock %}
 </head>
 <body>
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" href="map" role="button" >Map</a>
+      <a class="nav-link active" href="../templates/map.html">Map</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="../price_comparison/index.html">Price Comparison</a>
+      <a class="nav-link" href="../price_comparison/index.html"
+        >Price Comparisons</a
+      >
     </li>
     <li class="nav-item">
       <a class="nav-link" href="../trend_prediction/index.html">Predictions</a>
     </li>
-   
   </ul>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12" id="filter">
-      </div>
+      <div class="col-md-12" id="filter"></div>
     </div>
     <div class="row">
       <div class="col-md-10">
         <div class="row">
-          <div class="col-md-12" id="race_graph">
-          </div>
+          <div class="col-md-12" id="race_graph"></div>
         </div>
         <div class="row">
-          <div class="col-md-4" id="pie">
-          </div>
-          <div class="col-md-6" id="race_graph_origin">
-          </div>
+          <div class="col-md-4" id="pie"></div>
+          <div class="col-md-6" id="race_graph_origin"></div>
         </div>
       </div>
-      <div class="col-md-2" id="json">
-      </div>
+      <div class="col-md-2" id="json"></div>
     </div>
     <div class="row">
-      <div class="col-md-1">
-
-      </div>
-      <div class="col-md-8" id="table">
-      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-8" id="table"></div>
     </div>
     <div class="row">
       <div class="col-md-12">
-       
-        <ol>
-    
-        </ol>
+        <ol></ol>
       </div>
     </div>
   </div>

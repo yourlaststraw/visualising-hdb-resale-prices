@@ -16,7 +16,7 @@ def about():
 
 @app.route('/map')
 def map():
-    with open('/Users/sujitharajan/visualising-hdb-resale-prices/data/output_file.json', 'r') as f:
+    with open('../data/output_file.json', 'r') as f:
       fileData = json.load(f)
       f.close()
     years = request.args.get('years', default=None)

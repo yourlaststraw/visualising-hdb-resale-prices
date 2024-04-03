@@ -61,9 +61,9 @@ function createFloorAreaSqmPlot(data, title, containerId) {
   var h = 500;
   var margin = {
     top: 50,
-    bottom: 100,
-    left: 80, // Adjusted to accommodate longer x-axis labels
-    right: 20,
+    bottom: 50,
+    left: 50, // Adjusted to accommodate longer x-axis labels
+    right: 50,
   };
   var width = w - margin.left - margin.right;
   var height = h - margin.top - margin.bottom;
@@ -208,10 +208,10 @@ d3.csv(
   // Calculate average resale price for each floor area sqm
   var averagePrices = calculateAverageResalePrice(data);
 
-  // Create scatter plot for chart2
+  // Create scatter plot for chart7
   createFloorAreaSqmPlot(
     averagePrices,
     "Average Resale Price vs. Floor Area Sqm",
-    "chart5"
+    "chart7"
   );
 })

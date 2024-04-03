@@ -1,5 +1,5 @@
-// Function to create a bar chart
-function createTownChart(data, title, containerId) {
+// Function to create a line chart
+function createRemainingLeaseChart(data, title, containerId) {
   var w = 700;
   var h = 500;
   var margin = {
@@ -30,29 +30,23 @@ function createTownChart(data, title, containerId) {
 
   // Define scales and axes
   var x = d3
-    .scaleBand()
-    .domain(data.map(function(d) { return d[0]; }))
-    .range([margin.left, width])
-    .padding(0.1);
+    .scaleLinear()
+    .domain([d3.min(data, function(d) { return d[0]; }), d3.max(data, function(d) { return d[0]; })])
+    .range([margin.left, width]);
 
   var y = d3
     .scaleLinear()
     .domain([0, d3.max(data, function(d) { return d[1]; })])
     .range([height, margin.top]);
 
-  var xAxis = d3.axisBottom().scale(x);
+  var xAxis = d3.axisBottom().scale(x).tickFormat(d3.format("d"));
   var yAxis = d3.axisLeft().scale(y);
 
   // Append X axis
   svg.append("g")
     .attr("class", "x-axis")
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxis)
-    .selectAll("text")
-    .style("text-anchor", "end")
-    .attr("dx", "-.8em")
-    .attr("dy", ".15em")
-    .attr("transform", "rotate(-45)");
+    .call(xAxis);
 
   // Append Y axis
   svg.append("g")
@@ -60,56 +54,64 @@ function createTownChart(data, title, containerId) {
     .attr("transform", "translate(" + margin.left + ",0)")
     .call(yAxis);
 
-  // Append bars
-  svg.selectAll(".bar")
+  // Define line function
+  var line = d3.line()
+    .x(function(d) { return x(d[0]); })
+    .y(function(d) { return y(d[1]); });
+
+  // Append line
+  svg.append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+  // Append tooltips
+  svg.selectAll(".dot")
     .data(data)
-    .enter()
-    .append("rect")
-    .attr("class", "bar")
-    .attr("x", function(d) { return x(d[0]); })
-    .attr("width", x.bandwidth())
-    .attr("y", height)
-    .attr("height", 0)
+    .enter().append("circle")
+    .attr("class", "dot")
+    .attr("cx", function(d) { return x(d[0]); })
+    .attr("cy", function(d) { return y(d[1]); })
+    .attr("r", 5)
     .attr("fill", "steelblue")
-    .on("mouseover", function () {
+    .on("mouseover", function(d) {
       d3.select(this).attr("fill", "red");
     })
-    .on("mouseout", function () {
+    .on("mouseout", function(d) {
       d3.select(this).transition("colorfade")
         .duration(250)
         .attr("fill", "steelblue");
-    })
-    .transition()
-    .duration(1000)
-    .attr("y", function(d) { return y(d[1]); })
-    .attr("height", function(d) { return height - y(d[1]); });
+    });
 
   // Append tooltips
-  svg.selectAll("rect")
+  svg.selectAll(".dot")
     .append("title")
-    .text(function(d) { return d[0] + ": $" + d[1].toFixed(2); });
+    .text(function(d) { return d[0] + " Years: $" + d[1].toFixed(2); });
 }
 
-// Load data and create bar charts
-d3.csv("../../data/ResaleflatpricesbasedonregistrationdatefromJan2017onwards.csv").then(function(data) {
+// Load data and create line charts
+d3.csv("../../data/remaining_lease.csv").then(function(data) {
 
   // Convert value strings to numbers
   data.forEach(function(d) {
+    d.remaining_lease = +d.remaining_lease;
     d.resale_price = +d.resale_price;
   });
 
-  // Calculate average resale price for each town
+  // Calculate average resale price for each lease commence date
   var averagePrices = d3.rollups(
     data,
     (v) => d3.mean(v, (d) => d.resale_price),
-    (d) => d.town
+    (d) => d.remaining_lease
   );
 
-  // Sort averagePrices by average resale price
+  // Sort averagePrices by lease commence date
   averagePrices.sort(function(a, b) {
-    return d3.descending(a[1], b[1]);
+    return d3.ascending(a[0], b[0]);
   });
 
-  // Create bar chart for chart1
-  createTownChart(averagePrices, "Average Resale Price vs. Town", "chart1");
+  // Create line chart for chart1
+  createLeaseCommenceDateChart(averagePrices, "Average Resale Price vs. Remaining Lease (Years)", "chart6");
 });

@@ -4,9 +4,9 @@ function createFlatModelChart(data, title, containerId) {
     var h = 500;
     var margin = {
       top: 50,
-      bottom: 100,
-      left: 80, // Adjusted to accommodate longer x-axis labels
-      right: 20,
+      bottom: 50,
+      left: 50, // Adjusted to accommodate longer x-axis labels
+      right: 50,
     };
     var width = w - margin.left - margin.right;
     var height = h - margin.top - margin.bottom;

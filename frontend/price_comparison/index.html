@@ -9,17 +9,38 @@
       .chart-container {
         float: left; /* Float the containers to position them side by side */
         width: 50%; /* Set the width of each container to 50% to fit two containers side by side */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        padding: 10px; /* Add padding to create space around the charts */
+        text-align: center; /* Center align the charts within each container */
+      }
+
+      /* Define styles for the rectangles */
+      .rectangle {
+        border: 1px solid #000; /* Add border to the rectangles */
+        border-top: none;
+        border-right: none;
+      }
+
+      /* Define styles for the last row, merging boxes into one */
+      .merged-box {
+        clear: both; /* Clear the float to force the merged box to be in a new row */
+        width: 100%; /* Set the width of the merged box to 100% */
+        display: flex; /* Use flexbox to align items vertically */
+        flex-direction: column; /* Align items vertically */
+        justify-content: center; /* Center align items vertically */
+        align-items: center; /* Center align items horizontally */
+        text-align: center; /* Center align the charts within each container */
       }
     </style>
   </head>
   <body>
-
-    <div id="chart1" class="chart-container"></div>
-    <div id="chart2" class="chart-container"></div>
-    <div id="chart3" class="chart-container"></div>
-    <div id="chart4" class="chart-container"></div>
-    <div id="chart5" class="chart-container"></div>
-    <!-- <div id="chart6" class="chart-container"></div> -->
+    <div id="chart1" class="chart-container rectangle"></div>
+    <div id="chart2" class="chart-container rectangle"></div>
+    <div id="chart3" class="chart-container rectangle"></div>
+    <div id="chart4" class="chart-container rectangle"></div>
+    <div id="chart5" class="chart-container rectangle"></div>
+    <div id="chart6" class="chart-container rectangle"></div>
+    <div id="chart7" class="chart-container rectangle merged-box"></div>
 
     <script src="town.js"></script>
 
@@ -29,8 +50,10 @@
 
     <script src="flat_model.js"></script>
 
-    <script src="floor_area_sqm.js"></script>
+    <script src="lease_commence_date.js"></script>
 
-    <!-- <script src="lease_commence_date.js"></script> -->
+    <script src="remaining_lease.js"></script>
+
+    <script src="floor_area_sqm.js"></script>
   </body>
 </html>
