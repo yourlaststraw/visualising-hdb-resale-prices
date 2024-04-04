@@ -95,6 +95,7 @@
     </style>
 {% endblock %}
 {% block content %}
+<div id = "test"> </div>
 <div class="filter-section">
     <form id="filterForm" action="/map" method="get">
         <select id="years" name="years">
@@ -323,8 +324,28 @@
     
         
         slider.noUiSlider.on('update', function (values, handle) {
-            console.log(values[handle]);
+            var minValue = values[0];
+            var maxValue = values[1];
+            sendValuesToServer(minValue, maxValue);
         });
+        function sendValuesToServer(minValue, maxValue) {
+            console.log("check this:", minValue)
+            // Use a library like jQuery for AJAX
+            $.ajax({
+                url: '/', // Adjust the URL as needed
+                method: 'POST',
+                data: {
+                    min_price: minValue,
+                    max_price: maxValue
+                },
+                success: function(response) {
+                    console.log("Values sent successfully:", response);
+                },
+                error: function(error) {
+                    console.error("Error sending values:", error);
+                }
+            });
+        }
     
     </script>
     
