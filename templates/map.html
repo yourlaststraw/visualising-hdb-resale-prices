@@ -163,6 +163,7 @@
 <div class="container">
     <div class="sidebar">
         <!-- Sidebar content here -->
+        <p id = "value"> </p> 
         <p> Resale Price Range: </p>
         <br>
         <div class = "slider" id="slider-price-range"></div>
@@ -242,7 +243,7 @@
                 popupAnchor: [0, -36],
                 html: `<div style="${markerHtmlStyles}"><div style="${innerCircleStyles}"></div></div>`
             });
-    
+
             
             var marker = L.marker([lat, lng], { icon: customMarkerIcon }).addTo(map);
 
@@ -329,21 +330,22 @@
             sendValuesToServer(minValue, maxValue);
         });
         function sendValuesToServer(minValue, maxValue) {
-            console.log("check this:", minValue)
+           
             // Use a library like jQuery for AJAX
             $.ajax({
                 url: '/', // Adjust the URL as needed
-                method: 'POST',
-                data: {
-                    min_price: minValue,
-                    max_price: maxValue
-                },
-                success: function(response) {
-                    console.log("Values sent successfully:", response);
-                },
-                error: function(error) {
-                    console.error("Error sending values:", error);
-                }
+                method: 'GET',
+               
+                data: 
+                { min_price: minValue,
+                  max_price: maxValue },
+                
+                success: function(response) { 
+                    console.log(data); 
+                }, 
+                error: function(error) { 
+                    console.log(error); 
+                } 
             });
         }
     

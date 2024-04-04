@@ -22,22 +22,25 @@ def prediction():
     data_json2 = df2.to_json(orient='records')
     return render_template('trend.html',data_json2 =  data_json2 )
 
-@app.route('/', methods=["POST"])
+@app.route('/', methods = ['GET'])
 def map():
     with open('/Users/sujitharajan/visualising-hdb-resale-prices/data/output_file.json', 'r') as f:
       fileData = json.load(f)
       f.close()
-    min_price = float(request.form.get('min_price')) # Default to 0.0 if not provided
-    max_price = float(request.form.get('max_price'))
+    min_price = float(request.args.get('min_price', default = 160000.0))
+    max_price = float(request.args.get('max_price', default = 1185000.0))
     years = request.args.get('years', default=None)
     town = request.args.get('town', default=None)
     storey_range = request.args.get('storeyRange', default=None)
     flat_model = request.args.get('flatModel', default=None)
     filtered_data = [item for item in fileData if
+                     
                      (not town or item['town'] == town) and
                      (not storey_range or item['storey_range'] == storey_range) and
                      (not flat_model or item['flat_model'] == flat_model) and 
-                     (min_price <= float(item['resale_price']) <= max_price)]
+                     (min_price <= float(item['resale_price']) <= max_price)  
+                    ]
+    print(len(filtered_data))
     towns = ['', 'ANG MO KIO', 'BEDOK', 'BISHAN', 'BUKIT BATOK', 'BUKIT MERAH',
        'BUKIT PANJANG', 'BUKIT TIMAH', 'CENTRAL AREA', 'CHOA CHU KANG',
        'CLEMENTI', 'GEYLANG', 'HOUGANG', 'JURONG EAST', 'JURONG WEST',
@@ -55,7 +58,8 @@ def map():
        'Model A2']
     year = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
     return render_template('map.html', fileData=filtered_data, towns=towns, storey_ranges=storey_ranges, flat_models=flat_models, 
-                           town = town, storey_range =storey_range, flat_model=flat_model, year = year )
+                           town = town, storey_range =storey_range, flat_model=flat_model, year = year, min_price =min_price,
+                           max_price =max_price)
 
 
 @app.route('/submit', methods=['POST'])
