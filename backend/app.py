@@ -3,20 +3,20 @@ import json
 import pandas as pd
 from datetime import datetime, date
 
-app = Flask(__name__, template_folder='../frontend/templates')
+
+app = Flask(__name__, template_folder='../templates')
 
 # Define routes
+
+@app.route('/price')
+def price():
+    df = pd.read_csv('/Users/sujitharajan/visualising-hdb-resale-prices/data/ResaleflatpricesbasedonregistrationdatefromJan2017onwards.csv')
+    data_json = df.to_json(orient='records')
+    return render_template('index.html', data_json=data_json)
+
 @app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/map')
 def map():
-    with open('../data/output_file.json', 'r') as f:
+    with open('/Users/sujitharajan/visualising-hdb-resale-prices/data/output_file.json', 'r') as f:
       fileData = json.load(f)
       f.close()
     years = request.args.get('years', default=None)
@@ -45,7 +45,8 @@ def map():
     year = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
     return render_template('map.html', fileData=filtered_data, towns=towns, storey_ranges=storey_ranges, flat_models=flat_models, 
                            town = town, storey_range =storey_range, flat_model=flat_model, year = year )
-# Example of handling form submission
+
+
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
