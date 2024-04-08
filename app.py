@@ -12,21 +12,21 @@ app = Flask(__name__)
 
 @app.route('/price')
 def price():
-    df = pd.read_csv('../data/ResaleflatpricesbasedonregistrationdatefromJan2017onwards.csv')
+    df = pd.read_csv('./data/ResaleflatpricesbasedonregistrationdatefromJan2017onwards.csv')
     data_json = df.to_json(orient='records')
-    df1 = pd.read_csv('../data/remaining_lease.csv')
+    df1 = pd.read_csv('./data/remaining_lease.csv')
     data_json1 = df1.to_json(orient='records')
     return render_template('index.html', data_json=data_json, data_json1 =  data_json1)
 
 @app.route('/prediction')
 def prediction():
-    df2 = pd.read_csv('../data/data.csv')
+    df2 = pd.read_csv('./data/data.csv')
     data_json2 = df2.to_json(orient='records')
     return render_template('trend.html',data_json2 =  data_json2 )
 
 @app.route('/', methods = ['GET'])
 def map():
-    with open('../data/output_file.json', 'r') as f:
+    with open('./data/output_file.json', 'r') as f:
       fileData = json.load(f)
       f.close()
     min_price = float(request.args.get('min_price', default = 160000.0))
