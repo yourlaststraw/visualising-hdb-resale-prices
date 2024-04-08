@@ -6,16 +6,20 @@
     
     <!-- Leaflet stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <!-- Leaflet JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider/distribute/nouislider.min.css">
     <script src="https://cdn.jsdelivr.net/npm/nouislider/distribute/nouislider.min.js"></script>
 
+
     <style>
-        body {
-            margin: 0;
+        bhtml, body {
+            
+            height: 100vh; /* Sets the body height to fill the viewport */
+            margin: 0; /* Removes default margin */
         }
+        
         .container {
             display: flex;
             height: 100vh;
@@ -26,8 +30,8 @@
             background-color: #FFAA33;
             padding-top: 30px; /* Padding inside the sidebar */
             overflow-y: auto; /* Enables vertical scroll if content overflows */
-            padding-left: 40px;
-            padding-right: 40px;
+            padding-left: 35px;
+            padding-right: 35px;
         }
         #map {
             flex-grow: 1; /* Takes up remaining space */
@@ -47,13 +51,14 @@
 
         }
         .filter-section select {
-        width: 24.5%; 
+        width: 25%; 
         height: 45px;
         margin-bottom: 20px;
         box-sizing: border-box;
-        background-color:#ffba58; 
-        border-color: #ffba58 ;
-        font-color: white;
+        background-color: #505050; 
+        border-color:   white ;
+        color:  white;
+        margin-left: -5px;
         
         }
         .filter-section select:hover {
@@ -66,56 +71,181 @@
             dislay: flex;
         }
     }
-   .sidebar {
-    margin-left: -15px;
-    background-color:#505050;
-   }
-   .filter-section select option:selected {
-    font-color: white; 
-    font-weight: bold; /* Bold font weight */
-  }
-  .aligns {
-    text-align: center;
-    color: white;
-  }
-  .slider {
-    background-color: #ffe9cd;
-  }
+    .sidebar {
+        margin-left: -15px;
+        background-color: #505050;
+        padding-right: 20px;
+        width: 20%;
+        height:100%;
+    }
+    .filter-section select option:selected {
+        font-color: white; 
+        font-weight: bold; /* Bold font weight */
+    }
+    .aligns {
+        text-align: center;
+        color: white;
+    }
+    .slider {
+        background-color: white;
+        margin-right: 25px;
+        border: none;
+    }
 
     
     .noUi-connect {  
-    background-color:#81b8ff;
+    background-color:#006969;
+    border: none;
     }
 
     .noUi-handle {  /* Styling for the slider handles */
-    background-color:black;
-    border: black;
+
+    border-radius: 50% !important; /* Make the handles fully rounded */
+    width: 24px !important; /* Adjust the width as needed */
+    height: 24px !important; /* Adjust the height as needed */
+    top: -4px !important; /* Adjust top position to align handle center with slider line */
+    background-color: :#505050 !important; /* Optional: Change background color */
+    border: 1px solid #FFF !important; /* Optional: Change border */
+    box-shadow: none !important; /* Optional: Remove or adjust the shadow */
     }
-  
+
+    .noUi-tooltip {
+        background-color: white !important; /* Change tooltip background color */
+        color: #505050 !important; /* Change tooltip text color */
+        border-radius: 8px !important; /* Make the tooltip edges more rounded */
+        padding: 3px 6px !important; /* Adjust padding inside the tooltip */
+        font-size: 14px !important; /* Adjust tooltip font size */
+        font-family: Arial, sans-serif !important; /* Change tooltip font family */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important; /* Optional: Add a subtle shadow to the tooltip */
+        font-style: bold;
+    }
+    
+
+    .x {
+        font-size: 12px;
+        color: #ffeacc;
+    }
+    
+    .y {
+        color: #222222;
+        font-family: Arial, sans-serif;
+        display: inline-block; 
+        vertical-align: middle; 
+        margin-left: 8px;
+
+    }
+    .big {
+        font-size: 18px;
+        font-family: 'Source Sans Pro', sans-serif;
+        margin-left: -20px;
+        color: white;
+    }
+    .gg-home-alt {
+        box-sizing: border-box;
+        position: relative;
+        display: block;
+        transform: scale(var(--ggs,1));
+        width: 18px;
+        height: 14px;
+        border: 2px solid;
+        border-top: 0;
+        border-radius: 2px;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        margin-bottom: -2px
+    }
+    .gg-home-alt::after,
+    .gg-home-alt::before {
+        content: "";
+        display: block;
+        box-sizing: border-box;
+        position: absolute
+    }
+    .gg-home-alt::before {
+        border-top: 2px solid;
+        border-left: 2px solid;
+        border-top-left-radius: 4px;
+        transform: rotate(45deg);
+        top: -5px;
+        border-radius: 3px;
+        width: 14px;
+        height: 14px;
+        left: 0
+    }
+    .gg-home-alt::after {
+        width: 6px;
+        height: 10px;
+        background: currentColor;
+        border-top-left-radius: 100px;
+        border-top-right-radius: 100px;
+        left: 4px;
+        bottom: -2px
+    }
+    .bn62 {
+        color: white;
+        background-color: #006969;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2em;
+        width: 8em;
+        font-size: medium;
+        font-weight: 500;
+        margin-left: 20%;
+      }
+    #infoDiv {
+        background-color:  #006969;
+        height: 70%;
+        margin-left: -32px;
+        margin-right: -20px
+    }
+    #showdiv {
+        background-color:  #006969;
+        height: 70%;
+        margin-left: -32px;
+        margin-right: -20px
+    }
+    #mg {
+        margin: 10px;
+        padding-top: 10%;
+    }
+    #tt {
+        margin: 5px;
+        text-align: center;
+        padding-top: 80%;
+        font-family: Arial, sans-serif;
+    }
+    .info {
+        color: white;
+        font-size: 15px;
+    }
+    #img {
+        width: 25px;
+        height:25px;
+        margin-bottom: 7px
+    }
+
     </style>
 {% endblock %}
 {% block content %}
-<div id = "test"> </div>
 <div class="filter-section">
+
     <form id="filterForm" action="/map" method="get">
         <select id="years" name="years">
-            {% if years == '' or years == None%}
-            <option class = "aligns" value="Select Year" disabled selected>Select Year</option>
-            {% else %}
-            <option class = "aligns" value="" disabled selected>{{years}}</option>
-            {%endif%}
-            {% for year in year %}
-                {% if year == '' %}
-                <option value=""> Select Year </option>
-                {%else%}
-                <option value="{{ year }}">{{ year }}</option>
-                {% endif %}
+            {% for year in years %}
+                <option class = "aligns" value="{{ year }}" {% if year|string() == selected_year %}selected{% endif %}>
+                    {{ year }}
+                </option>
             {% endfor %}
         </select>
         
         <select id="town" name="town">
             {% if town == '' or town == None%}
-            <option class = "aligns" value="Select Town" disabled selected>Select Town</option>
+            
+            <option class = "aligns" value="" disabled selected>
+                Select Town 
+            </option>
             {% else %}
             <option class = "aligns" value="" disabled selected>{{town}}</option>
             {%endif%}
@@ -163,25 +293,35 @@
 <div class="container">
     <div class="sidebar">
         <!-- Sidebar content here -->
-        <p id = "value"> </p> 
-        <p> Resale Price Range: </p>
+        <p class = "big"> Resale Price Range: </p>
         <br>
         <div class = "slider" id="slider-price-range"></div>
+        <br/>
+        <button id="applyFilters" class="bn62" >Apply Filters</button>
         <br>
-        <div id="infoDiv">Click a marker to show info here</div>
+        
+        <div id="infoDiv">
+            <h4 id = 'tt'> Click a marker to show info here </h4>
+        </div>
         <div id ="showdiv" style="display: none;">
-            <h5> Address: </h5>
-            <p id = "add"> </p>
-            <h5> Price: </h5>
-            <p id = "price"> </p>
-            <h5> Closest Mrt: </h5>
-            <p id = "mrt"> </p>
-            <h5> Closest School: </h5>
-            <p id = "sch"> </p>
-            <h5> Closest Hospital: </h5>
-            <p id = "hosp"> </p>
+            <div id = "mg">
+            <img id="img" src="{{ url_for('static', filename='images/image.png') }}" style="display: inline-block; vertical-align: middle;">
+            <h5 class="y" >Address:</h5>
+            <p class= "info" id = "add" class = "x"> </p>
+            <img id="img" src="{{ url_for('static', filename='images/image1.png') }}" style="display: inline-block; vertical-align: middle;">
+            <h5 class = "y"> Price: </h5>
+            <p class= "info" id = "price" class = "x"> </p>
+            <img id="img" src="{{ url_for('static', filename='images/image2.png') }}" style="display: inline-block; vertical-align: middle;">
+            <h5 class = "y"> Closest Mrt: </h5>
+            <p class= "info" id = "mrt" class = "x"> </p>
+            <img id="img" src="{{ url_for('static', filename='images/image3.png') }}" style="display: inline-block; vertical-align: middle;">
+            <h5 class = "y"> Closest School: </h5>
+            <p class= "info" id = "sch" class = "x"> </p>
+            <img id="img" src="{{ url_for('static', filename='images/image4.png') }}" style="display: inline-block; vertical-align: middle;">
+            <h5 class = "y"> Closest Hospital: </h5>
+            <p class= "info" id = "hosp" class = "x"> </p>
 
-
+            </div>
         </div>
     </div>
     <div id="map"></div>
@@ -206,7 +346,8 @@
         if (!Array.isArray(fileData)) {
             fileData = [fileData]; // Ensure fileData is an array
         }
-        
+        console.log(fileData)
+
         // Loop through the data and add markers
         fileData.forEach(function(item) {
             var lat = parseFloat(item.latitude);
@@ -214,7 +355,7 @@
             // Validate coordinates before adding the marker
             if (!isNaN(lat) && !isNaN(lng)) {
                 var markerHtmlStyles = `
-                    background-color: #505050;
+                    background-color:#006969;
                     width: 1.8rem;
                     height: 1.8rem;
                     display: block;
@@ -223,13 +364,13 @@
                     position: relative;
                     border-radius: 2rem 2rem 0;
                     transform: rotate(45deg);
-                    border: 1px solid #81b8ff`;
+                    border: 1px solid white`;
     
                 var innerCircleStyles = `
                     width: 0.9rem;
                     height: 0.9rem;
                     border-radius: 50%;
-                    background-color: #81b8ff;
+                    background-color:white;
                     position: absolute;
                     top: 17%;
                     left: 13%;
@@ -269,85 +410,107 @@
                     divToHide.style.display = 'none'; // Hide it
                     divToShow.style.display = 'block'; // Show the second div
                     document.getElementById('add').innerHTML = address;
-                    document.getElementById('price').innerHTML = price;
-                    document.getElementById('mrt').innerHTML = mrt + ', ' + parseFloat(mrt_distance.toFixed(3)) + "Km away";
-                    document.getElementById('sch').innerHTML = sch + ', ' + parseFloat(sch_distance.toFixed(3)) + "Km away";
-                    document.getElementById('hosp').innerHTML = hosp + ', ' + parseFloat(hosp_distance.toFixed(3)) + "Km away";
+                    document.getElementById('price').innerHTML = '$'+ price;
+                    document.getElementById('mrt').innerHTML = mrt + '</br> ' + parseFloat(mrt_distance.toFixed(3)) + "Km away";
+                    document.getElementById('sch').innerHTML = sch + '</br>' + parseFloat(sch_distance.toFixed(3)) + "Km away";
+                    document.getElementById('hosp').innerHTML = hosp + '</br>' + parseFloat(hosp_distance.toFixed(3)) + "Km away";
              
                 
             });
         }
     });
-        document.addEventListener('DOMContentLoaded', function() {
-            const updateQueryStringParameter = (uri, key, value) => {
-                const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-                const separator = uri.indexOf('?') !== -1 ? "&" : "?";
-                if (uri.match(re)) {
-                    return uri.replace(re, '$1' + key + "=" + value + '$2');
-                }
-                else {
-                    return uri + separator + key + "=" + value;
-                }
-            };
-        
-            document.querySelectorAll('#filterForm select').forEach(selectElement => {
-                selectElement.addEventListener('change', function() {
-                    let currentUrl = window.location.href;
-                    let newUrl = updateQueryStringParameter(currentUrl, this.name, this.value);
-                    window.location.href = newUrl; // Navigate to the new URL
-                });
+    document.addEventListener('DOMContentLoaded', function() {
+        const updateQueryStringParameter = (uri, key, value) => {
+            const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            const separator = uri.indexOf('?') !== -1 ? "&" : "?";
+            if (uri.match(re)) {
+                return uri.replace(re, '$1' + key + "=" + value + '$2');
+            } else {
+                return uri + separator + key + "=" + value;
+            }
+        };
+    
+        document.querySelectorAll('#filterForm select').forEach(selectElement => {
+            selectElement.addEventListener('change', function() {
+                let currentUrl = window.location.href;
+                let newUrl = updateQueryStringParameter(currentUrl, this.name, this.value);
+                window.location.href = newUrl; // Navigate to the new URL
             });
         });
-
-    </script>
-    <script>
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to update URL query parameters
+        const updateQueryStringParameter = (uri, key, value) => {
+            const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+            const separator = uri.indexOf('?') !== -1 ? "&" : "?";
+            if (uri.match(re)) {
+                return uri.replace(re, '$1' + key + "=" + value + '$2');
+            } else {
+                return uri + separator + key + "=" + value;
+            }
+        };
+    
+        // Function to get a query variable's value
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return null; // Default to null if not found
+        }
+    
+        // Initialize slider with values from URL or defaults
+        var initialMinPrice = parseFloat(getQueryVariable('min_price')) || 160000; // Default min value
+        var initialMaxPrice = parseFloat(getQueryVariable('max_price')) || 1185000; // Default max value
+    
         var slider = document.getElementById('slider-price-range');
     
         noUiSlider.create(slider, {
-            start: [160000, 1185000],
+            start: [initialMinPrice, initialMaxPrice],
             connect: true,
             range: {
-                'min': 160000.0,
-                'max': 1185000.0
+                'min': 160000,
+                'max': 1185000
             },
-            // This step value will control how much the slider changes with each movement
             step: 1000,
             tooltips: true,
             format: {
-              to: function (value) {
-                return value.toFixed(0);
-              },
-              from: function (value) {
-                return Number(value);
-              }
+                to: function(value) {
+                    return value.toFixed(0);
+                },
+                from: function(value) {
+                    return Number(value);
+                }
             }
         });
     
-        
-        slider.noUiSlider.on('update', function (values, handle) {
-            var minValue = values[0];
-            var maxValue = values[1];
-            sendValuesToServer(minValue, maxValue);
+        // Update global variables on slider change
+        slider.noUiSlider.on('change', function(values, handle) {
+            let minValue = values[0];
+            let maxValue = values[1];
+            let currentUrl = window.location.href;
+            let newUrl = updateQueryStringParameter(currentUrl, 'min_price', minValue);
+            newUrl = updateQueryStringParameter(newUrl, 'max_price', maxValue);
+            // Commented out to prevent immediate navigation
+            // window.location.href = newUrl;
         });
-        function sendValuesToServer(minValue, maxValue) {
-           
-            // Use a library like jQuery for AJAX
-            $.ajax({
-                url: '/', // Adjust the URL as needed
-                method: 'GET',
-               
-                data: 
-                { min_price: minValue,
-                  max_price: maxValue },
-                
-                success: function(response) { 
-                    console.log(data); 
-                }, 
-                error: function(error) { 
-                    console.log(error); 
-                } 
-            });
-        }
+    
+        // Apply Filters button
+        document.getElementById('applyFilters').addEventListener('click', function() {
+            let minValue = slider.noUiSlider.get()[0];
+            let maxValue = slider.noUiSlider.get()[1];
+            let currentUrl = window.location.href;
+            let newUrl = updateQueryStringParameter(currentUrl, 'min_price', minValue);
+            newUrl = updateQueryStringParameter(newUrl, 'max_price', maxValue);
+            window.location.href = newUrl; // Apply the filters
+        });
+    });
+    
     
     </script>
     

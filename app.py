@@ -2,45 +2,48 @@ from flask import Flask, render_template, request
 import json
 import pandas as pd
 from datetime import datetime, date
+import os
 
 
-app = Flask(__name__, template_folder='../templates')
+app = Flask(__name__)
 
 # Define routes
 
+
 @app.route('/price')
 def price():
-    df = pd.read_csv('/Users/sujitharajan/visualising-hdb-resale-prices/data/ResaleflatpricesbasedonregistrationdatefromJan2017onwards.csv')
+    df = pd.read_csv('../data/ResaleflatpricesbasedonregistrationdatefromJan2017onwards.csv')
     data_json = df.to_json(orient='records')
-    df1 = pd.read_csv('/Users/sujitharajan/visualising-hdb-resale-prices/data/remaining_lease.csv')
+    df1 = pd.read_csv('../data/remaining_lease.csv')
     data_json1 = df1.to_json(orient='records')
     return render_template('index.html', data_json=data_json, data_json1 =  data_json1)
 
 @app.route('/prediction')
 def prediction():
-    df2 = pd.read_csv('/Users/sujitharajan/visualising-hdb-resale-prices/data/data.csv')
+    df2 = pd.read_csv('../data/data.csv')
     data_json2 = df2.to_json(orient='records')
     return render_template('trend.html',data_json2 =  data_json2 )
 
 @app.route('/', methods = ['GET'])
 def map():
-    with open('/Users/sujitharajan/visualising-hdb-resale-prices/data/output_file.json', 'r') as f:
+    with open('../data/output_file.json', 'r') as f:
       fileData = json.load(f)
       f.close()
     min_price = float(request.args.get('min_price', default = 160000.0))
     max_price = float(request.args.get('max_price', default = 1185000.0))
-    years = request.args.get('years', default=None)
+    selected_year = request.args.get('years', default='2017')
     town = request.args.get('town', default=None)
     storey_range = request.args.get('storeyRange', default=None)
     flat_model = request.args.get('flatModel', default=None)
-    filtered_data = [item for item in fileData if
-                     
-                     (not town or item['town'] == town) and
-                     (not storey_range or item['storey_range'] == storey_range) and
-                     (not flat_model or item['flat_model'] == flat_model) and 
-                     (min_price <= float(item['resale_price']) <= max_price)  
-                    ]
-    print(len(filtered_data))
+    filtered_data = []
+    for item in fileData:
+        item_year = item['month'].split("-")[0]         
+        if ((not selected_year or item_year == selected_year) and
+            (not town or item['town'] == town) and
+            (not storey_range or item['storey_range'] == storey_range) and
+            (not flat_model or item['flat_model'] == flat_model) and
+            min_price <= float(item['resale_price']) <= max_price):
+            filtered_data.append(item)
     towns = ['', 'ANG MO KIO', 'BEDOK', 'BISHAN', 'BUKIT BATOK', 'BUKIT MERAH',
        'BUKIT PANJANG', 'BUKIT TIMAH', 'CENTRAL AREA', 'CHOA CHU KANG',
        'CLEMENTI', 'GEYLANG', 'HOUGANG', 'JURONG EAST', 'JURONG WEST',
@@ -56,10 +59,10 @@ def map():
        'Simplified', 'Model A', 'Premium Apartment', 'Adjoined flat',
        'Model A-Maisonette', 'Maisonette', 'Type S1', 'Type S2',
        'Model A2']
-    year = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
+    years = [ 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
     return render_template('map.html', fileData=filtered_data, towns=towns, storey_ranges=storey_ranges, flat_models=flat_models, 
-                           town = town, storey_range =storey_range, flat_model=flat_model, year = year, min_price =min_price,
-                           max_price =max_price)
+                           town = town, storey_range =storey_range, flat_model=flat_model, years = years, min_price =min_price,
+                           max_price =max_price, selected_year=selected_year)
 
 
 @app.route('/submit', methods=['POST'])

@@ -1020,7 +1020,7 @@ svg
   .append("g")
   .attr("transform", `translate(0, ${height})`)
   .attr("class", "xAxis")
-  .call(d3.axisBottom(x).tickFormat(yearFormat));
+  .call(d3.axisBottom(x));
 
 // Add the y-axis
 svg.append("g").attr("class", "yAxis").call(d3.axisLeft(y));
@@ -1083,26 +1083,26 @@ svg
 // Handmade legend
 svg
   .append("circle")
-  .attr("cx", 500)
+  .attr("cx", 750)
   .attr("cy", -20)
   .attr("r", 6)
   .style("fill", "steelblue");
 svg
   .append("circle")
-  .attr("cx", 500)
+  .attr("cx", 750)
   .attr("cy", 5)
   .attr("r", 6)
   .style("fill", "red");
 svg
   .append("text")
-  .attr("x", 520)
+  .attr("x", 800)
   .attr("y", -20)
   .text("Actual")
   .style("font-size", "15px")
   .attr("alignment-baseline", "middle");
 svg
   .append("text")
-  .attr("x", 520)
+  .attr("x", 800)
   .attr("y", 5)
   .text("Predicted")
   .style("font-size", "15px")
