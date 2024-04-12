@@ -98,15 +98,18 @@
 <body>
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" href="/">Map</a>
+      <a class="nav-link {% if active_tab == 'map' %}active{% endif %}" href="/">Map</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/price"
+      <a class="nav-link {% if active_tab == 'price' %}active{% endif %}" href="/price"
         >Price Comparisons</a
       >
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/prediction">Predictions</a>
+      <a class="nav-link {% if active_tab == 'prediction' %}active{% endif %}"  href="/prediction">Predictions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link clickable {% if active_tab == 'amenities' %}active{% endif %}" href="/amenities">Amenities</a>
     </li>
   </ul>
   <div class="container-fluid">
@@ -136,6 +139,5 @@
     </div>
   </div>
 
-  <script></script>
   {% block content %}{% endblock %}
 </body>

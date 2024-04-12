@@ -24,6 +24,10 @@ def prediction():
     data_json2 = df2.to_json(orient='records')
     return render_template('trend.html',data_json2 =  data_json2 )
 
+@app.route('/amenities')
+def amenities():
+    return render_template('tableau.html')
+
 @app.route('/', methods = ['GET'])
 def map():
     with open('./data/output_file.json', 'r') as f:
