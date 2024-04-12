@@ -28,6 +28,10 @@ def prediction():
 def amenities():
     return render_template('tableau.html')
 
+@app.route('/amenities1')
+def amenities1():
+    return render_template('tableau1.html')
+
 @app.route('/', methods = ['GET'])
 def map():
     with open('./data/output_file.json', 'r') as f:
