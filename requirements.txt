@@ -45,7 +45,7 @@ murmurhash==1.0.10
 mysql-connector-python==8.0.28
 nest-asyncio==1.5.7
 nltk==3.8.1
-numpy==1.22.3
+numpy==1.24.1
 openpyxl==3.0.9
 outcome==1.2.0
 packaging==23.1
