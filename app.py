@@ -34,7 +34,7 @@ def amenities1():
 
 @app.route('/', methods = ['GET'])
 def map():
-    with open('./data/output_file.json', 'r') as f:
+    with open('./data/mapdata.json', 'r') as f:
       fileData = json.load(f)
       f.close()
     min_price = float(request.args.get('min_price', default = 160000.0))
