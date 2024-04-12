@@ -106,6 +106,6 @@ urllib3==1.26.8
 wasabi==1.1.2
 wcwidth==0.2.6
 weasel==0.3.3
-Werkzeug==2.0.2
+Werkzeug==2.2.2
 wsproto==1.2.0
 yfinance==0.1.70
